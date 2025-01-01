@@ -79,4 +79,35 @@ public class LoginRegisterController : MonoBehaviour
         }
     }
 
+    public async void OnRegisterButtonClicked()
+    {
+        if (apiManager == null || usernameInput == null || passwordInput == null)
+        {
+            Debug.LogError("UIController references are not set up correctly.");
+            return;
+        }
+
+        string username = usernameInput.text;
+        string password = passwordInput.text;
+
+        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+        {
+            feedbackText.text = "Please enter a valid username and password.";
+            return;
+        }
+
+        string response = await apiManager.RegisterUser(username, password);
+
+        if (!string.IsNullOrEmpty(response))
+        {
+            feedbackText.text = "Registration Successful!";
+            // set the load game active
+            loadGameButton.gameObject.SetActive(true);
+
+        }
+        else
+        {
+            feedbackText.text = "Registration Failed!";
+        }
+    }
 }
