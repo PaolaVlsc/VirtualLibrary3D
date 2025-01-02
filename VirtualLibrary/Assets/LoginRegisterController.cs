@@ -83,7 +83,7 @@ public class LoginRegisterController : MonoBehaviour
 
         // Store the username in the Singleton
         UserSessionManager.Instance.LoggedInUsername = username;
-        SceneManager.LoadScene("Library"); // Replace "Scene2" with the actual target scene name
+        SceneManager.LoadScene("Playground"); // Replace "Scene2" with the actual target scene name
 
     }
     public async void OnRegisterButtonClicked()
