@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoginRegisterController : MonoBehaviour
 {
@@ -64,14 +65,11 @@ public class LoginRegisterController : MonoBehaviour
 
         if (!string.IsNullOrEmpty(response))
         {
-            // Store the username in the Singleton
-            //  UserSessionManager.Instance.LoggedInUsername = username;
 
             feedbackText.text = "Login Successful!";
             // set the load game active
             loadGameButton.gameObject.SetActive(true);
 
-            // SceneManager.LoadScene("Scene2"); // Replace "Scene2" with the actual target scene name
         }
         else
         {
@@ -79,6 +77,15 @@ public class LoginRegisterController : MonoBehaviour
         }
     }
 
+
+    public void OnLoadGameButtonClicked(string username)
+    {
+
+        // Store the username in the Singleton
+        UserSessionManager.Instance.LoggedInUsername = username;
+        SceneManager.LoadScene("Library"); // Replace "Scene2" with the actual target scene name
+
+    }
     public async void OnRegisterButtonClicked()
     {
         if (apiManager == null || usernameInput == null || passwordInput == null)
