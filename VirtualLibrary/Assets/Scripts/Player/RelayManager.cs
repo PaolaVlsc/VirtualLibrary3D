@@ -47,18 +47,18 @@ public class RelayManager : NetworkBehaviour
         }
         catch (System.Exception ex)
         {
-            Debug.LogError($"Failed to sign in or initialize services: {ex.Message}");
+            Debug.LogError($"Failed to sign in or initialffize services: {ex.Message}");
         }
     }
 
-    private void Update()
-    {
-        // Check if the "K" key is pressed
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            LeaveSession();
-        }
-    }
+    // private void Update()
+    // {
+    //     // Check if the "K" key is pressed
+    //     if (Input.GetKeyDown(KeyCode.K))
+    //     {
+    //         LeaveSession();
+    //     }
+    // }
 
     private async void CreateRelay()
     {
@@ -131,12 +131,12 @@ public class RelayManager : NetworkBehaviour
             NetworkManager.Singleton.Shutdown();
 
             // Load the library scene for the host
-            SceneManager.LoadScene("Library");
+            SceneManager.LoadScene("Playground");
         }
         else if (clientId == NetworkManager.Singleton.LocalClientId)
         {
             Debug.Log("Local cliesnt disconnected. Returning to the library.");
-            SceneManager.LoadScene("Library");
+            SceneManager.LoadScene("Playground");
         }
         else
         {
@@ -154,14 +154,14 @@ public class RelayManager : NetworkBehaviour
             Debug.Log("Host is shutting down the session.");
             NetworkManager.Singleton.Shutdown();
             // Load the library scene
-            SceneManager.LoadScene("Library");
+            SceneManager.LoadScene("Playground");
         }
         else if (NetworkManager.Singleton.IsClient)
         {
             Debug.Log("Client is disconnecting from the session.");
             NetworkManager.Singleton.Shutdown();
             // Load the library scene
-            SceneManager.LoadScene("Library");
+            SceneManager.LoadScene("Playgrounda");
         }
 
     }

@@ -17,6 +17,7 @@ public class LobbyEntrance : MonoBehaviour, IInteractable
 
     private void LoadMultiplayerLobby()
     {
-        SceneManager.LoadScene("MultiplayerLobby");
+        // SceneManager.LoadScene("MultiplayerLobby");
+        SceneManager.LoadScene("testlobby");
     }
 }

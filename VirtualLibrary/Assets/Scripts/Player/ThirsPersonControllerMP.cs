@@ -172,6 +172,8 @@ namespace StarterAssets
 
         private void Update()
         {
+            if (!IsOwner || ChatSystem.IsChatFocused) return; // Skip updates if chat is focused
+
             if (IsOwner)
             {
                 _hasAnimator = TryGetComponent(out _animator);
@@ -179,11 +181,12 @@ namespace StarterAssets
                 JumpAndGravity();
                 GroundedCheck();
                 Move();
-            };
+            }
         }
 
         private void LateUpdate()
         {
+            if (!IsOwner || ChatSystem.IsChatFocused) return; // Disable camera rotation if the chat is focused
             CameraRotation();
         }
 
