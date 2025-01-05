@@ -49,7 +49,6 @@ public class LoginRegisterController : MonoBehaviour
     }
 
 
-    // Login button handler
     public async void OnLoginButtonClicked()
     {
         if (apiManager == null || usernameInput == null || passwordInput == null)
@@ -61,21 +60,25 @@ public class LoginRegisterController : MonoBehaviour
         string username = usernameInput.text;
         string password = passwordInput.text;
 
-        string response = await apiManager.LoginUser(username, password);
+        var response = await apiManager.LoginUser(username, password);
 
-        if (!string.IsNullOrEmpty(response))
+        if (response != null)
         {
+            feedbackText.text = response.Message;  // Display the success message
 
-            feedbackText.text = "Login Successful!";
-            // set the load game active
+            // Store the userId and username in the UserSessionManager
+            UserSessionManager.Instance.LoggedInUsername = response.Username;
+            UserSessionManager.Instance.UserId = response.UserId;
+
+            // Set the load game active
             loadGameButton.gameObject.SetActive(true);
-
         }
         else
         {
-            feedbackText.text = "Login Failed!";
+            feedbackText.text = "Login Failed!";  // Display error message
         }
     }
+
 
 
     public void OnLoadGameButtonClicked(string username)

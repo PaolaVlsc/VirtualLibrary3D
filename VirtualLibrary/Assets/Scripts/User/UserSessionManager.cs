@@ -34,6 +34,12 @@ public class UserSessionManager : MonoBehaviour
         get => _loggedInUsername;
         set => _loggedInUsername = value;
     }
+    private long _userId;  // Store the user ID
+    public long UserId
+    {
+        get => _userId;
+        set => _userId = value;
+    }
 
     // Ensure that this object persists across scene loads
     private void Awake()
