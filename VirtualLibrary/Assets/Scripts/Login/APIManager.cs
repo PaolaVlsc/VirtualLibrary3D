@@ -43,7 +43,37 @@ public class ApiManager : MonoBehaviour
     }
 
     // Login a user
-    public async Task<string> LoginUser(string username, string password)
+    // public async Task<string> LoginUser(string username, string password)
+    // {
+    //     var url = $"{BaseUrl}/login";
+
+    //     var user = new { username = username, password = password };
+    //     var jsonData = JsonConvert.SerializeObject(user);
+
+    //     using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
+    //     {
+    //         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+    //         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+    //         request.downloadHandler = new DownloadHandlerBuffer();
+    //         request.SetRequestHeader("Content-Type", "application/json");
+
+    //         var asyncOperation = request.SendWebRequest();
+    //         while (!asyncOperation.isDone) await Task.Yield();
+
+    //         if (request.result == UnityWebRequest.Result.Success)
+    //         {
+    //             Debug.Log("Response: " + request.downloadHandler.text);
+    //             return request.downloadHandler.text;
+    //         }
+    //         else
+    //         {
+    //             Debug.LogError("Error: " + request.error);
+    //             return null;
+    //         }
+    //     }
+    // }
+
+    public async Task<LoginResponse> LoginUser(string username, string password)
     {
         var url = $"{BaseUrl}/login";
 
@@ -62,8 +92,10 @@ public class ApiManager : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
+                // Parse the JSON response into a LoginResponse object
+                var response = JsonConvert.DeserializeObject<LoginResponse>(request.downloadHandler.text);
                 Debug.Log("Response: " + request.downloadHandler.text);
-                return request.downloadHandler.text;
+                return response;
             }
             else
             {
@@ -72,4 +104,5 @@ public class ApiManager : MonoBehaviour
             }
         }
     }
+
 }
