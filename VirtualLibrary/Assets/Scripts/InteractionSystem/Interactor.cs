@@ -50,6 +50,17 @@ public class Interactor : MonoBehaviour
                         chest.RentBook(userId);
                     }
                 }
+
+                // Handle "T" key for adding the book to favorites
+                if (Keyboard.current.tKey.wasPressedThisFrame)
+                {
+                    Debug.Log("T key pressed - Adding book to favorites");
+                    Chest chest = _colliders[0].GetComponent<Chest>();
+                    if (chest != null)
+                    {
+                        chest.AddToFavorites(userId);
+                    }
+                }
             }
         }
         else
